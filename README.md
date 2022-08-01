@@ -4,6 +4,7 @@ Backend created with Spring Boot to management tasks.
 To run Project with Docker: 
 
 1. run *docker-compose up* to start project, nothing else needed.
+#Notes: the Dockerfile is running with openjdk:17, you might have to change your Java version. If you get an error with the class, just run the project without Docker.
 
 To run Project without Docker:
 
