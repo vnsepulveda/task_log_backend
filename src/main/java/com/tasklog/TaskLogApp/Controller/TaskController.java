@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class TaskController {
 	private ITaskService taskService;
 	
 	@PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<String> register(@RequestBody Task task) {
 		try {
 			String result = taskService.register(task);
@@ -38,18 +40,28 @@ public class TaskController {
 	}
 	
 	@GetMapping(value = "/all")
-    public ResponseEntity<List<Task>> getAllMovements() {
+	@CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<Task>> getAllTasks() {
         List<Task> tasks = taskService.getAll();
         return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
     }
 	
 	@DeleteMapping(value = "/{id}")
+	@CrossOrigin(origins = "http://localhost:3000")
 	 public ResponseEntity<String> deleteTaskById(@PathVariable("id") Integer taskId) {
         String result = taskService.delete(taskId);
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 	
+	@GetMapping(value = "/{id}")
+	@CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Task> getTaskById(@PathVariable("id") Integer taskId) {
+        Task task = taskService.getById(taskId);
+        return new ResponseEntity<Task>(task, HttpStatus.OK);
+    }
+	
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> updateMovement(@RequestBody Task task) {
         try {
             String result = taskService.update(task);

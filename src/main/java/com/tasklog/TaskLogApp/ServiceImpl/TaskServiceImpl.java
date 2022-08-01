@@ -43,6 +43,10 @@ public class TaskServiceImpl implements ITaskService {
 		return result;
 	}
 	
+	public Task getById(Integer idTask) {
+		return repository.findById(idTask).get();
+	}
+	
 	
 	public String update(Task task) {
 		String result = "";
